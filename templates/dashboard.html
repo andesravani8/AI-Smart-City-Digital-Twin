@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartCity AI | Digital Twin</title>
+
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <!-- Leaflet -->
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/main.css') }}">
+
+
+    <!-- Dashboard CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+
+    <!-- Animations -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/animations.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="app-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-icon">
+
+                <i class="bi bi-buildings"></i>
+
+            </div>
+
+
+            <div>
+
+                <h2>SMARTCITY</h2>
+
+                <span>AI DIGITAL TWIN</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- MAIN -->
+
+        <div class="sidebar-section-title">
+
+            MAIN
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+
+            <!-- Dashboard -->
+
+            <a href="/"
+               class="nav-item active">
+
+                <i class="bi bi-grid-1x2-fill"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <!-- Traffic -->
+
+            <a href="/traffic"
+               class="nav-item">
+
+                <i class="bi bi-car-front-fill"></i>
+
+                <span>Traffic</span>
+
+                <span class="nav-status green"></span>
+
+            </a>
+
+
+            <!-- Air Quality -->
+
+            <a href="/air-quality"
+               class="nav-item">
+
+                <i class="bi bi-cloud-haze2-fill"></i>
+
+                <span>Air Quality</span>
+
+                <span class="nav-status yellow"></span>
+
+            </a>
+
+
+            <!-- Accidents -->
+
+            <a href="/accidents"
+               class="nav-item">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                <span>Accidents</span>
+
+            </a>
+
+
+            <!-- Energy -->
+
+            <a href="/energy"
+               class="nav-item">
+
+                <i class="bi bi-lightning-charge-fill"></i>
+
+                <span>Energy</span>
+
+            </a>
+
+
+            <!-- Weather -->
+
+            <a href="/weather"
+               class="nav-item">
+
+                <i class="bi bi-cloud-sun-fill"></i>
+
+                <span>Weather</span>
+
+            </a>
+
+
+            <!-- INTELLIGENCE -->
+
+            <div class="sidebar-section-title mt-4">
+
+                INTELLIGENCE
+
+            </div>
+
+
+            <!-- Digital Twin -->
+
+            <a href="/digital-twin"
+               class="nav-item">
+
+                <i class="bi bi-globe-americas"></i>
+
+                <span>Digital Twin</span>
+
+            </a>
+
+
+            <!-- Simulator -->
+
+            <a href="/simulator"
+               class="nav-item">
+
+                <i class="bi bi-sliders2"></i>
+
+                <span>Simulator</span>
+
+            </a>
+
+
+            <!-- AI Assistant -->
+
+            <a href="/assistant"
+               class="nav-item">
+
+                <i class="bi bi-robot"></i>
+
+                <span>AI Assistant</span>
+
+                <span class="ai-badge">AI</span>
+
+            </a>
+
+
+            <!-- Alerts -->
+
+            <a href="/alerts"
+               class="nav-item">
+
+                <i class="bi bi-bell-fill"></i>
+
+                <span>Alerts</span>
+
+                <span class="alert-count"
+                      id="sidebar-alert-count">
+
+                    0
+
+                </span>
+
+            </a>
+
+
+            <!-- Reports -->
+
+            <a href="/reports"
+               class="nav-item">
+
+                <i class="bi bi-file-earmark-bar-graph-fill"></i>
+
+                <span>Reports</span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- SYSTEM STATUS -->
+
+        <div class="system-status">
+
+            <div class="status-header">
+
+                <span>System Status</span>
+
+                <span class="live-dot"></span>
+
+            </div>
+
+
+            <div class="status-value">
+
+                ALL SYSTEMS OPERATIONAL
+
+            </div>
+
+
+            <div class="status-bar">
+
+                <div></div>
+
+            </div>
+
+
+            <small>
+
+                Last synchronized just now
+
+            </small>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<header class="topbar">
+
+    <!-- MOBILE MENU -->
+
+    <div class="mobile-menu">
+
+        <i class="bi bi-list"></i>
+
+    </div>
+
+
+    <!-- BREADCRUMB -->
+
+    <div class="breadcrumb-area">
+
+        <span class="muted">
+            Smart City
+        </span>
+
+        <i class="bi bi-chevron-right"></i>
+
+        <strong>
+            Command Center
+        </strong>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="topbar-actions">
+
+
+        <!-- LIVE -->
+
+        <div class="live-indicator">
+
+            <span class="live-dot"></span>
+
+            <span>
+                LIVE
+            </span>
+
+        </div>
+
+
+        <!-- NOTIFICATION -->
+
+        <button
+            type="button"
+            class="icon-btn"
+        >
+
+            <i class="bi bi-bell"></i>
+
+            <span class="notification-dot"></span>
+
+        </button>
+
+
+        <!-- PROFILE -->
+
+        <div class="profile">
+
+            <div class="profile-avatar">
+                ML
+            </div>
+
+            <div class="profile-info">
+
+                <strong>
+                    City Administrator
+                </strong>
+
+                <span>
+                    Control Center
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout-btn"
+        >
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+
+    </div>
+
+</header>
+
+        <!-- =================================================
+             DASHBOARD CONTENT
+        ================================================== -->
+
+        <section class="dashboard-content">
+
+
+            <!-- HERO -->
+
+            <div class="hero-section">
+
+
+                <div>
+
+                    <div class="eyebrow">
+
+                        <span class="pulse-line"></span>
+
+                        CITY INTELLIGENCE PLATFORM
+
+                    </div>
+
+
+                    <h1>
+
+                        Good Evening,
+
+                        <span>Administrator.</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Real-time intelligence and predictive
+                        insights for your smart city.
+
+                    </p>
+
+                </div>
+
+
+                <div class="hero-time">
+
+                    <span id="currentDate">
+
+                        Loading...
+
+                    </span>
+
+
+                    <strong id="currentTime">
+
+                        --:--:--
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 KPI CARDS
+            ================================================== -->
+
+            <div class="kpi-grid">
+
+
+                <!-- TRAFFIC -->
+
+                <div class="kpi-card traffic-card">
+
+
+                    <div class="kpi-top">
+
+                        <div class="kpi-icon">
+
+                            <i class="bi bi-car-front-fill"></i>
+
+                        </div>
+
+
+                        <span class="trend positive">
+
+                            <i class="bi bi-arrow-down"></i>
+
+                            8.4%
+
+                        </span>
+
+                    </div>
+
+
+                    <span class="kpi-label">
+
+                        TRAFFIC CONGESTION
+
+                    </span>
+
+
+                    <div class="kpi-value">
+
+                        <span id="traffic-value">
+
+                            72
+
+                        </span>
+
+                        <span>%</span>
+
+                    </div>
+
+
+                    <div class="kpi-footer">
+
+                        <span>
+
+                            vs yesterday
+
+                        </span>
+
+
+                        <span class="status-text good">
+
+                            MODERATE
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="mini-progress">
+
+                        <div id="traffic-progress"
+                             style="width:72%">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- AIR QUALITY -->
+
+                <div class="kpi-card air-card">
+
+
+                    <div class="kpi-top">
+
+                        <div class="kpi-icon">
+
+                            <i class="bi bi-cloud-haze2-fill"></i>
+
+                        </div>
+
+
+                        <span class="trend negative">
+
+                            <i class="bi bi-arrow-up"></i>
+
+                            3.2%
+
+                        </span>
+
+                    </div>
+
+
+                    <span class="kpi-label">
+
+                        AIR QUALITY INDEX
+
+                    </span>
+
+
+                    <div class="kpi-value">
+
+                        <span id="aqi-value">
+
+                            86
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="kpi-footer">
+
+                        <span>
+
+                            PM2.5 • 34 µg/m³
+
+                        </span>
+
+
+                        <span class="status-text warning">
+
+                            MODERATE
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="mini-progress">
+
+                        <div id="aqi-progress"
+                             style="width:58%">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ENERGY -->
+
+                <div class="kpi-card energy-card">
+
+
+                    <div class="kpi-top">
+
+                        <div class="kpi-icon">
+
+                            <i class="bi bi-lightning-charge-fill"></i>
+
+                        </div>
+
+
+                        <span class="trend positive">
+
+                            <i class="bi bi-arrow-down"></i>
+
+                            5.7%
+
+                        </span>
+
+                    </div>
+
+
+                    <span class="kpi-label">
+
+                        ENERGY LOAD
+
+                    </span>
+
+
+                    <div class="kpi-value">
+
+                        <span id="energy-value">
+
+                            64
+
+                        </span>
+
+                        <span>%</span>
+
+                    </div>
+
+
+                    <div class="kpi-footer">
+
+                        <span>
+
+                            1.82 GWh today
+
+                        </span>
+
+
+                        <span class="status-text good">
+
+                            OPTIMAL
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="mini-progress">
+
+                        <div id="energy-progress"
+                             style="width:64%">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- WEATHER -->
+
+                <div class="kpi-card weather-card">
+
+
+                    <div class="kpi-top">
+
+                        <div class="kpi-icon">
+
+                            <i class="bi bi-cloud-sun-fill"></i>
+
+                        </div>
+
+
+                        <span class="trend neutral">
+
+                            28°C
+
+                        </span>
+
+                    </div>
+
+
+                    <span class="kpi-label">
+
+                        CITY WEATHER
+
+                    </span>
+
+
+                    <div class="kpi-value weather-value">
+
+                        <span id="weather-value">
+
+                            28
+
+                        </span>
+
+                        °
+
+                        <small>C</small>
+
+                    </div>
+
+
+                    <div class="kpi-footer">
+
+                        <span>
+
+                            Humidity 68%
+
+                        </span>
+
+
+                        <span class="status-text good">
+
+                            CLEAR
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="weather-bars">
+
+                        <span style="height:35%"></span>
+
+                        <span style="height:50%"></span>
+
+                        <span style="height:42%"></span>
+
+                        <span style="height:70%"></span>
+
+                        <span style="height:60%"></span>
+
+                        <span style="height:80%"></span>
+
+                        <span style="height:55%"></span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MAP + ALERTS
+            ================================================== -->
+
+            <div class="main-grid">
+
+
+                <!-- MAP -->
+
+                <div class="glass-panel city-map-panel">
+
+
+                    <div class="panel-header">
+
+
+                        <div>
+
+                            <span class="panel-eyebrow">
+
+                                LIVE MONITORING
+
+                            </span>
+
+
+                            <h3>
+
+                                City Intelligence Map
+
+                            </h3>
+
+                        </div>
+
+
+                        <div class="map-controls">
+
+
+                            <button class="map-filter active">
+
+                                ALL
+
+                            </button>
+
+
+                            <button class="map-filter">
+
+                                TRAFFIC
+
+                            </button>
+
+
+                            <button class="map-filter">
+
+                                AIR
+
+                            </button>
+
+
+                            <button class="map-filter">
+
+                                INCIDENTS
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div id="cityMap"
+                         class="city-map">
+
+                        <div class="map-overlay">
+
+                            <div class="map-live">
+
+                                <span class="live-dot"></span>
+
+                                LIVE CITY DATA
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MAP FOOTER -->
+
+                    <div class="map-footer">
+
+
+                        <!-- Active Zones -->
+
+                        <div class="map-stat">
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+
+                            <div>
+
+                                <strong id="total-zones">
+
+                                    4
+
+                                </strong>
+
+
+                                <span>
+
+                                    Active Zones
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Congested Roads -->
+
+                        <div class="map-stat">
+
+                            <i class="bi bi-sign-turn-right-fill"></i>
+
+
+                            <div>
+
+                                <strong id="congested-roads">
+
+                                    8
+
+                                </strong>
+
+
+                                <span>
+
+                                    Congested Roads
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Active Alerts -->
+
+                        <div class="map-stat">
+
+                            <i class="bi bi-exclamation-circle-fill"></i>
+
+
+                            <div>
+
+                                <strong id="active-alerts">
+
+                                    0
+
+                                </strong>
+
+
+                                <span>
+
+                                    Active Alerts
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <button class="view-map-btn"
+                                onclick="window.location.href='/digital-twin'">
+
+                            Open Digital Twin
+
+                            <i class="bi bi-arrow-up-right"></i>
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ALERTS -->
+
+                <div class="glass-panel alerts-panel">
+
+
+                    <div class="panel-header">
+
+
+                        <div>
+
+                            <span class="panel-eyebrow">
+
+                                AI MONITORING
+
+                            </span>
+
+
+                            <h3>
+
+                                Smart Alerts
+
+                            </h3>
+
+                        </div>
+
+
+                        <a href="/alerts"
+                           class="view-all">
+
+                            View all
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="alerts-list"
+                         id="dashboard-alerts">
+
+
+                        <!-- Alerts will be loaded from database -->
+
+                        <div class="alert-item info">
+
+
+                            <div class="alert-icon">
+
+                                <i class="bi bi-info-circle-fill"></i>
+
+                            </div>
+
+
+                            <div class="alert-content">
+
+                                <strong>
+
+                                    Loading smart alerts...
+
+                                </strong>
+
+
+                                <span>
+
+                                    Checking city conditions
+
+                                </span>
+
+
+                                <small>
+
+                                    Just now
+
+                                </small>
+
+                            </div>
+
+
+                            <span class="severity info">
+
+                                LIVE
+
+                            </span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CHARTS
+            ================================================== -->
+
+            <div class="charts-grid">
+
+
+                <!-- TRAFFIC FORECAST -->
+
+                <div class="glass-panel chart-panel">
+
+
+                    <div class="panel-header">
+
+
+                        <div>
+
+                            <span class="panel-eyebrow">
+
+                                ML PREDICTION
+
+                            </span>
+
+
+                            <h3>
+
+                                Traffic Forecast
+
+                            </h3>
+
+                        </div>
+
+
+                        <span class="prediction-badge">
+
+                            <i class="bi bi-stars"></i>
+
+                            AI POWERED
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-summary">
+
+
+                        <div>
+
+                            <span>
+
+                                Predicted Peak
+
+                            </span>
+
+
+                            <strong id="traffic-peak">
+
+                                --
+
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+
+                                At
+
+                            </span>
+
+
+                            <strong id="traffic-peak-time">
+
+                                --
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="chart-change">
+
+                            <i class="bi bi-arrow-down"></i>
+
+                            6.8%
+
+                        </div>
+
+
+                    </div>
+
+
+                    <canvas id="trafficChart"></canvas>
+
+
+                </div>
+
+
+
+                <!-- ENERGY FORECAST -->
+
+                <div class="glass-panel chart-panel">
+
+
+                    <div class="panel-header">
+
+
+                        <div>
+
+                            <span class="panel-eyebrow">
+
+                                ML PREDICTION
+
+                            </span>
+
+
+                            <h3>
+
+                                Energy Demand
+
+                            </h3>
+
+                        </div>
+
+
+                        <span class="prediction-badge">
+
+                            <i class="bi bi-stars"></i>
+
+                            AI POWERED
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-summary">
+
+
+                        <div>
+
+                            <span>
+
+                                Today's Usage
+
+                            </span>
+
+
+                            <strong id="energy-usage">
+
+                                --
+
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+
+                                Forecast
+
+                            </span>
+
+
+                            <strong id="energy-forecast">
+
+                                --
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="chart-change positive">
+
+                            +6.4%
+
+                        </div>
+
+
+                    </div>
+
+
+                    <canvas id="energyChart"></canvas>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 AI INSIGHT
+            ================================================== -->
+
+            <div class="ai-insight-panel">
+
+
+                <div class="ai-orb">
+
+                    <div class="orb-ring"></div>
+
+                    <i class="bi bi-stars"></i>
+
+                </div>
+
+
+                <div class="ai-insight-content">
+
+
+                    <span class="panel-eyebrow">
+
+                        AI CITY INSIGHT
+
+                    </span>
+
+
+                    <h3>
+
+                        City conditions are
+
+                        <span>
+
+                            being analyzed.
+
+                        </span>
+
+                    </h3>
+
+
+                    <p id="ai-city-insight">
+
+                        AI is analyzing current traffic,
+                        air quality, energy and weather patterns.
+
+                    </p>
+
+
+                </div>
+
+
+                <a href="/assistant"
+                   class="ai-action">
+
+                    Ask AI Assistant
+
+                    <i class="bi bi-arrow-up-right"></i>
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT LIBRARIES
+====================================================== -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js">
+</script>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+
+<!-- =====================================================
+     PROJECT JAVASCRIPT
+====================================================== -->
+
+
+<script src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+
+
+<script src="{{ url_for('static', filename='js/charts.js') }}">
+</script>
+
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}">
+</script>
+
+
+</body>
+
+</html>

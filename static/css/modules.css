@@ -1,0 +1,241 @@
+/* =========================================================
+   SMART CITY - STANDALONE MODULE PAGES
+   Used by Accident, Weather, Digital Twin, Simulator,
+   Assistant, Alerts and Reports.
+   Traffic / Energy / Air Quality existing inline UI is untouched.
+   ========================================================= */
+
+.sc-page{
+    width:100%;
+    max-width:1250px;
+    margin:0 auto;
+    padding:40px 25px 60px;
+    color:#fff;
+}
+
+.sc-page .page-header{
+    margin-bottom:30px;
+}
+
+.sc-page .page-header h1{
+    margin:0 0 8px;
+    font-size:34px;
+    font-weight:800;
+    color:#fff;
+}
+
+.sc-page .page-header h1 i{color:#00d4ff}
+.sc-page .page-header p{margin:0;color:#9caec4;font-size:15px}
+
+.sc-page .ml-badge,
+.sc-page .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:7px 13px;
+    border-radius:20px;
+    background:rgba(0,212,255,.10);
+    border:1px solid rgba(0,212,255,.25);
+    color:#00d4ff;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.4px;
+    margin-top:14px;
+}
+
+.sc-page .glass-card,
+.sc-page .panel{
+    background:rgba(17,30,50,.90);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:28px;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    backdrop-filter:blur(10px);
+}
+
+.sc-page .section-title{
+    color:#e8f5ff;
+    font-size:19px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+.sc-page .section-title i{color:#00d4ff;margin-right:8px}
+
+.sc-page .input-section{
+    border:1px solid rgba(255,255,255,.06);
+    background:rgba(7,17,31,.35);
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.sc-page .input-section-title{
+    color:#e8f5ff;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:16px;
+}
+.sc-page .input-section-title i{color:#00d4ff;margin-right:7px}
+
+.sc-page .form-label,
+.sc-page label{
+    color:#b8c7d9;
+    font-weight:600;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.sc-page .form-control,
+.sc-page .form-select,
+.sc-page input,
+.sc-page select,
+.sc-page textarea{
+    width:100%;
+    box-sizing:border-box;
+    background:#0c1a2b;
+    color:#fff;
+    border:1px solid #263b55;
+    border-radius:10px;
+    padding:11px 13px;
+    min-height:46px;
+    outline:none;
+}
+
+.sc-page .form-control::placeholder,
+.sc-page input::placeholder{color:#667991}
+
+.sc-page .form-control:focus,
+.sc-page .form-select:focus,
+.sc-page input:focus,
+.sc-page select:focus,
+.sc-page textarea:focus{
+    background:#0c1a2b;
+    color:#fff;
+    border-color:#00d4ff;
+    box-shadow:0 0 0 .2rem rgba(0,212,255,.12);
+}
+
+.sc-page option{background:#0c1a2b;color:#fff}
+.sc-page .input-help{color:#7f91a8;font-size:12px;margin-top:6px}
+
+.sc-page .predict-btn,
+.sc-page .btn-main{
+    width:100%;
+    border:0;
+    border-radius:12px;
+    padding:13px 18px;
+    font-weight:700;
+    color:#fff;
+    background:linear-gradient(135deg,#087f9c,#00c6ff);
+    transition:.3s;
+    cursor:pointer;
+}
+
+.sc-page .predict-btn:hover,
+.sc-page .btn-main:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 25px rgba(0,198,255,.25);
+}
+
+.sc-page .predict-btn:disabled,
+.sc-page .btn-main:disabled{opacity:.7;cursor:not-allowed;transform:none}
+
+.sc-page .loading,
+.sc-page .error-box,
+.sc-page .success-box{
+    display:none;
+    margin-top:18px;
+    padding:15px;
+    border-radius:12px;
+}
+
+.sc-page .loading{text-align:center;color:#9caec4;background:rgba(0,198,255,.05);border:1px solid rgba(0,198,255,.15)}
+.sc-page .error-box{background:rgba(220,53,69,.15);border:1px solid rgba(220,53,69,.3);color:#ff8d99}
+.sc-page .success-box{background:rgba(0,198,255,.06);border:1px solid rgba(0,198,255,.18)}
+
+.sc-page .result-card{display:none;margin-top:25px}
+.sc-page .result-value{font-size:32px;font-weight:700;color:#00d4ff}
+.sc-page .result-label{color:#9caec4;font-size:14px}
+
+.sc-page .result-item,
+.sc-page .result-info-card{
+    background:rgba(7,17,31,.65);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:14px;
+    padding:18px;
+    height:100%;
+}
+
+.sc-page .result-item .result-label,
+.sc-page .result-info-card span{
+    display:block;
+    margin-bottom:8px;
+    color:#8fa0b8;
+    font-size:12px;
+}
+
+.sc-page .result-item .result-value,
+.sc-page .result-info-card strong{display:block;color:#fff;font-size:17px}
+
+.sc-page .risk-badge{display:inline-block;padding:8px 18px;border-radius:30px;font-weight:700;margin-top:8px}
+.sc-page .low{background:rgba(25,135,84,.2);color:#4ade80}
+.sc-page .medium{background:rgba(255,193,7,.2);color:#ffd43b}
+.sc-page .high{background:rgba(255,100,80,.2);color:#ff8066}
+.sc-page .critical{background:rgba(220,53,69,.25);color:#ff4d5e}
+
+/* Digital Twin */
+.sc-page .map-card{padding:18px}
+.sc-page #twinMap{height:470px;border-radius:14px;overflow:hidden;border:1px solid #263b55}
+.sc-page .list-row{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;gap:15px;align-items:center}
+.sc-page .list-row:last-child{border-bottom:0}
+.sc-page .list-name{color:#e7eef8;font-weight:600}
+.sc-page .badge{display:inline-block;padding:5px 9px;border-radius:8px;font-size:11px;font-weight:700}
+.sc-page .badge.cyan{color:#00d4ff;background:rgba(0,212,255,.1)}
+.sc-page .badge.green{color:#4ade80;background:rgba(74,222,128,.1)}
+.sc-page .badge.yellow{color:#ffd43b;background:rgba(255,211,67,.1)}
+.sc-page .badge.red{color:#ff6b7a;background:rgba(255,75,93,.1)}
+
+/* Simulator */
+.sc-page .sim-value{font-size:30px;font-weight:800;color:#00d4ff}
+.sc-page .status-panel{margin-top:20px;padding:18px;border-radius:14px;background:rgba(7,17,31,.65);border:1px solid rgba(255,255,255,.06)}
+.sc-page .impact-row{margin-top:14px}
+.sc-page .impact-row .top{display:flex;justify-content:space-between;color:#b8c7d9;font-size:13px;margin-bottom:7px}
+.sc-page .impact-bar{height:7px;background:#16253a;border-radius:10px;overflow:hidden}
+.sc-page .impact-bar span{display:block;height:100%;background:linear-gradient(90deg,#087f9c,#00c6ff);border-radius:10px}
+
+/* Assistant */
+.sc-page .chat-panel{display:flex;flex-direction:column;min-height:520px}
+.sc-page .messages{flex:1;max-height:430px;overflow:auto;padding:8px 2px 15px}
+.sc-page .msg{max-width:80%;padding:12px 15px;border-radius:14px;margin:10px 0;line-height:1.5;font-size:14px}
+.sc-page .msg.bot{background:#0c1a2b;border:1px solid #263b55;color:#dbe7f5}
+.sc-page .msg.user{margin-left:auto;background:rgba(0,198,255,.12);border:1px solid rgba(0,198,255,.25);color:#fff}
+.sc-page .chat-form{display:grid;grid-template-columns:1fr auto;gap:10px;border-top:1px solid rgba(255,255,255,.07);padding-top:18px}
+.sc-page .chat-form .btn-main{width:auto;min-width:100px}
+
+/* Alerts */
+.sc-page .alert-row{display:grid;grid-template-columns:auto 1fr auto;gap:15px;align-items:start;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.sc-page .alert-row:last-child{border-bottom:0}
+.sc-page .alert-title{font-weight:700;color:#fff;margin-bottom:4px}
+.sc-page .alert-message{color:#9caec4;font-size:13px;line-height:1.5}
+.sc-page .alert-time{color:#647991;font-size:11px;white-space:nowrap}
+
+/* Reports */
+.sc-page .report-toolbar{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:20px}
+.sc-page .report-toolbar .btn-main{width:auto}
+.sc-page .report-card{padding:18px;margin-top:14px}
+.sc-page .report-card h4{margin:0 0 6px;color:#fff;font-size:15px}
+.sc-page .report-card p{margin:0;color:#9caec4;font-size:13px}
+.sc-page .metric-number{font-size:26px;font-weight:800;color:#00d4ff}
+
+@media(max-width:768px){
+    .sc-page{padding:30px 16px 45px}
+    .sc-page .page-header h1{font-size:29px}
+    .sc-page .input-grid,.sc-page .result-grid{grid-template-columns:1fr!important}
+    .sc-page .chat-form{grid-template-columns:1fr}
+    .sc-page .chat-form .btn-main{width:100%}
+    .sc-page .report-toolbar{flex-direction:column;align-items:stretch}
+    .sc-page .report-toolbar .btn-main{width:100%}
+    .sc-page .alert-row{grid-template-columns:1fr}
+    .sc-page .alert-time{white-space:normal}
+    .sc-page #twinMap{height:360px}
+}

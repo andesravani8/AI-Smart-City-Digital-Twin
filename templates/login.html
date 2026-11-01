@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Smart City Digital Twin | Login
+    </title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         BOOTSTRAP ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           BODY
+        ====================================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            font-family: "Inter", sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(0, 217, 255, 0.10),
+                    transparent 25%
+                ),
+
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(37, 99, 235, 0.14),
+                    transparent 30%
+                ),
+
+                #020711;
+
+            color: #ffffff;
+
+            overflow-x: hidden;
+
+        }
+
+
+        /* =====================================================
+           BACKGROUND GRID
+        ====================================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 48px 48px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent
+                );
+
+            pointer-events: none;
+
+        }
+
+
+        /* =====================================================
+           MAIN WRAPPER
+        ====================================================== */
+
+        .page {
+
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                1.08fr
+                0.92fr;
+
+        }
+
+
+        /* =====================================================
+           LEFT SIDE
+        ====================================================== */
+
+        .hero {
+
+            position: relative;
+
+            min-height: 100vh;
+
+            padding:
+                50px 65px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 55%,
+                    rgba(0, 204, 255, .13),
+                    transparent 28%
+                );
+
+        }
+
+
+        /* =====================================================
+           GLOW ORBS
+        ====================================================== */
+
+        .glow-one {
+
+            position: absolute;
+
+            width: 330px;
+
+            height: 330px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(0, 217, 255, .10);
+
+            filter:
+                blur(70px);
+
+            top: 30%;
+
+            left: 27%;
+
+            animation:
+                floatGlow 7s ease-in-out infinite;
+
+        }
+
+
+        .glow-two {
+
+            position: absolute;
+
+            width: 250px;
+
+            height: 250px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(37, 99, 235, .12);
+
+            filter:
+                blur(75px);
+
+            bottom: 8%;
+
+            left: 10%;
+
+            animation:
+                floatGlow 9s ease-in-out infinite reverse;
+
+        }
+
+
+        @keyframes floatGlow {
+
+            0%, 100% {
+                transform:
+                    translateY(0px);
+            }
+
+            50% {
+                transform:
+                    translateY(-18px);
+            }
+
+        }
+
+
+        /* =====================================================
+           BRAND
+        ====================================================== */
+
+        .brand {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 17px;
+
+        }
+
+
+        .brand-icon {
+
+            width: 62px;
+
+            height: 62px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-size: 29px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #06b6d4,
+                    #2563eb
+                );
+
+            box-shadow:
+                0 0 32px
+                rgba(6,182,212,.35);
+
+        }
+
+
+        .brand-title {
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            letter-spacing:
+                -0.5px;
+
+        }
+
+
+        .brand-title span {
+
+            color: #22d3ee;
+
+        }
+
+
+        .brand-subtitle {
+
+            margin-top: 5px;
+
+            color: #7890ae;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        /* =====================================================
+           HERO CENTER
+        ====================================================== */
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 680px;
+
+        }
+
+
+        .eyebrow {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 18px;
+
+            padding:
+                7px 12px;
+
+            border-radius: 30px;
+
+            border:
+                1px solid
+                rgba(34,211,238,.20);
+
+            background:
+                rgba(34,211,238,.06);
+
+            color: #22d3ee;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.4px;
+
+        }
+
+
+        .eyebrow-dot {
+
+            width: 6px;
+
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #34d399;
+
+            box-shadow:
+                0 0 10px
+                rgba(52,211,153,.9);
+
+        }
+
+
+        .hero-title {
+
+            font-size:
+                clamp(38px, 4.3vw, 66px);
+
+            line-height:
+                1.04;
+
+            letter-spacing:
+                -2.2px;
+
+            font-weight: 800;
+
+        }
+
+
+        .hero-title .cyan {
+
+            color: #22d3ee;
+
+        }
+
+
+        .hero-description {
+
+            max-width: 590px;
+
+            margin-top: 22px;
+
+            color: #8ea0b7;
+
+            line-height: 1.75;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           FEATURE ITEMS
+        ====================================================== */
+
+        .features {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 12px;
+
+            margin-top: 38px;
+
+        }
+
+
+        .feature {
+
+            min-height: 100px;
+
+            padding: 15px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(7, 17, 31, .65);
+
+            border:
+                1px solid
+                rgba(94, 113, 143, .16);
+
+            backdrop-filter:
+                blur(12px);
+
+            transition:
+                .3s ease;
+
+        }
+
+
+        .feature:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(34,211,238,.28);
+
+        }
+
+
+        .feature-icon {
+
+            width: 33px;
+
+            height: 33px;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #22d3ee;
+
+            background:
+                rgba(34,211,238,.08);
+
+            margin-bottom: 11px;
+
+        }
+
+
+        .feature-title {
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            color: #e7eef8;
+
+        }
+
+
+        .feature-text {
+
+            margin-top: 4px;
+
+            color: #62758e;
+
+            font-size: 8px;
+
+        }
+
+
+        /* =====================================================
+           RIGHT SIDE
+        ====================================================== */
+
+        .login-side {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 35px;
+
+            position: relative;
+
+        }
+
+
+        /* =====================================================
+           LOGIN CARD
+        ====================================================== */
+
+        .login-card {
+
+            width: min(
+                100%,
+                495px
+            );
+
+            padding:
+                38px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(9, 22, 39, .97),
+                    rgba(4, 12, 23, .97)
+                );
+
+            border:
+                1px solid
+                rgba(34,211,238,.25);
+
+            box-shadow:
+
+                0 30px 90px
+                rgba(0,0,0,.55),
+
+                0 0 45px
+                rgba(34,211,238,.05);
+
+            backdrop-filter:
+                blur(18px);
+
+            animation:
+                cardAppear .7s ease;
+
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(22px)
+                    scale(.98);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           LOGIN HEADER
+        ====================================================== */
+
+        .welcome {
+
+            color: #22d3ee;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .login-title {
+
+            font-size: 31px;
+
+            line-height: 1.15;
+
+            font-weight: 800;
+
+        }
+
+
+        .login-description {
+
+            margin-top: 10px;
+
+            color: #7589a3;
+
+            font-size: 11px;
+
+            line-height: 1.65;
+
+        }
+
+
+        /* =====================================================
+           FLASH MESSAGE
+        ====================================================== */
+
+        .flash-message {
+
+            margin-top: 18px;
+
+            padding: 11px 13px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(239,68,68,.08);
+
+            border:
+                1px solid
+                rgba(239,68,68,.20);
+
+            color: #ff9da8;
+
+            font-size: 10px;
+
+        }
+
+
+        .flash-success {
+
+            background:
+                rgba(52,211,153,.08);
+
+            border-color:
+                rgba(52,211,153,.20);
+
+            color: #6ee7b7;
+
+        }
+
+
+        /* =====================================================
+           FORM
+        ====================================================== */
+
+        form {
+
+            margin-top: 28px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .label-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .label {
+
+            color: #afbdd0;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: .7px;
+
+        }
+
+
+        .forgot {
+
+            color: #22d3ee;
+
+            text-decoration: none;
+
+            font-size: 9px;
+
+        }
+
+
+        .forgot:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        .input-wrap {
+
+            position: relative;
+
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #7dd3fc;
+
+            font-size: 16px;
+
+            pointer-events: none;
+
+        }
+
+
+        input {
+
+            width: 100%;
+
+            height: 53px;
+
+            padding:
+                0 48px;
+
+            border-radius: 13px;
+
+            border:
+                1px solid
+                rgba(110,130,160,.22);
+
+            outline: none;
+
+            background:
+                rgba(2,9,19,.72);
+
+            color: #ffffff;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        input::placeholder {
+
+            color: #506177;
+
+        }
+
+
+        input:focus {
+
+            border-color:
+                rgba(34,211,238,.65);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(34,211,238,.06);
+
+            background:
+                rgba(3,12,24,.92);
+
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #63758e;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+        }
+
+
+        .password-toggle:hover {
+
+            color: #22d3ee;
+
+        }
+
+
+        /* =====================================================
+           REMEMBER
+        ====================================================== */
+
+        .remember-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin:
+                6px 0 22px;
+
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #7d90aa;
+
+            font-size: 10px;
+
+        }
+
+
+        .remember input {
+
+            width: 15px;
+
+            height: 15px;
+
+            padding: 0;
+
+            accent-color: #06b6d4;
+
+        }
+
+
+        /* =====================================================
+           LOGIN BUTTON
+        ====================================================== */
+
+        .login-btn {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 53px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: .4px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #06b6d4,
+                    #2563eb
+                );
+
+            box-shadow:
+                0 12px 28px
+                rgba(37,99,235,.26);
+
+            overflow: hidden;
+
+            transition:
+                .3s ease;
+
+        }
+
+
+        .login-btn::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 100%;
+
+            height: 100%;
+
+            top: 0;
+
+            left: -100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.23),
+                    transparent
+                );
+
+            transition:
+                .5s ease;
+
+        }
+
+
+        .login-btn:hover::before {
+
+            left: 100%;
+
+        }
+
+
+        .login-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 16px 34px
+                rgba(37,99,235,.34);
+
+        }
+
+
+        .login-btn i {
+
+            font-size: 16px;
+
+            margin-left: 6px;
+
+        }
+
+
+        /* =====================================================
+           OR
+        ====================================================== */
+
+        .or-divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin:
+                24px 0;
+
+            color: #53657c;
+
+            font-size: 9px;
+
+        }
+
+
+        .or-divider span {
+
+            flex: 1;
+
+            height: 1px;
+
+            background:
+                rgba(92,112,140,.18);
+
+        }
+
+
+        /* =====================================================
+           CREATE ACCOUNT
+        ====================================================== */
+
+        .create-btn {
+
+            width: 100%;
+
+            height: 50px;
+
+            border-radius: 13px;
+
+            border:
+                1px solid
+                rgba(34,211,238,.34);
+
+            background:
+                rgba(4,17,31,.62);
+
+            color: #bfeeff;
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            transition:
+                .3s ease;
+
+        }
+
+
+        .create-btn:hover {
+
+            border-color:
+                rgba(34,211,238,.75);
+
+            background:
+                rgba(34,211,238,.06);
+
+            color: white;
+
+        }
+
+
+        /* =====================================================
+           SECURITY FOOTER
+        ====================================================== */
+
+        .security {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 25px;
+
+            color: #53667e;
+
+            font-size: 8px;
+
+        }
+
+
+        .security i {
+
+            color: #34d399;
+
+        }
+
+
+        .security span {
+
+            color: #74879d;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1050px) {
+
+            .page {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .hero {
+
+                min-height:
+                    52vh;
+
+                padding:
+                    38px 35px;
+
+            }
+
+
+            .login-side {
+
+                min-height:
+                    48vh;
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .hero {
+
+                padding:
+                    28px 22px;
+
+            }
+
+
+            .login-side {
+
+                padding:
+                    22px;
+
+            }
+
+
+            .brand-title {
+
+                font-size:
+                    22px;
+
+            }
+
+
+            .hero-title {
+
+                font-size:
+                    39px;
+
+            }
+
+
+            .features {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .login-card {
+
+                padding:
+                    28px 22px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================================================
+         LEFT HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+
+        <div class="glow-one"></div>
+
+        <div class="glow-two"></div>
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-icon">
+
+                <i class="bi bi-buildings-fill"></i>
+
+            </div>
+
+
+            <div>
+
+                <div class="brand-title">
+
+                    Smart City
+                    <span>Digital Twin</span>
+
+                </div>
+
+
+                <div class="brand-subtitle">
+
+                    AI-POWERED URBAN INTELLIGENCE PLATFORM
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- HERO CONTENT -->
+
+        <div class="hero-content">
+
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                SMARTER DATA • SAFER CITIES
+
+            </div>
+
+
+            <h1 class="hero-title">
+
+                Building
+
+                <span class="cyan">
+                    Smarter,
+                </span>
+
+                <br>
+
+                Safer &
+
+                <span class="cyan">
+                    Greener
+                </span>
+
+                Cities
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                An intelligent Digital Twin platform powered
+                by Machine Learning for traffic forecasting,
+                air-quality monitoring, accident-risk analysis,
+                energy prediction and weather intelligence.
+
+            </p>
+
+
+            <!-- FEATURES -->
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-cpu-fill"></i>
+
+                    </div>
+
+                    <div class="feature-title">
+
+                        AI & ML
+
+                    </div>
+
+                    <div class="feature-text">
+
+                        Intelligent Predictions
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-globe2"></i>
+
+                    </div>
+
+                    <div class="feature-title">
+
+                        Digital Twin
+
+                    </div>
+
+                    <div class="feature-text">
+
+                        Location Visualization
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-bell-fill"></i>
+
+                    </div>
+
+                    <div class="feature-title">
+
+                        Real-time
+
+                    </div>
+
+                    <div class="feature-text">
+
+                        Smart Alerts
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-leaf-fill"></i>
+
+                    </div>
+
+                    <div class="feature-title">
+
+                        Sustainable
+
+                    </div>
+
+                    <div class="feature-text">
+
+                        Future-ready Cities
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div></div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LOGIN SIDE
+    ====================================================== -->
+
+    <section class="login-side">
+
+
+        <div class="login-card">
+
+
+            <div class="welcome">
+
+                Welcome Back
+
+            </div>
+
+
+            <h2 class="login-title">
+
+                Login to Your Account
+
+            </h2>
+
+
+            <p class="login-description">
+
+                Access the Smart City Digital Twin platform
+                and explore intelligent urban insights.
+
+            </p>
+
+
+
+            <!-- =================================================
+                 FLASH MESSAGES
+            ================================================== -->
+
+            {% with messages = get_flashed_messages(
+                with_categories=true
+            ) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div class="
+                            flash-message
+                            {% if category == 'success' %}
+                                flash-success
+                            {% endif %}
+                        ">
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+
+
+            <!-- =================================================
+                 LOGIN FORM
+            ================================================== -->
+
+            <form
+                method="POST"
+                action="{{ url_for('login_page') }}"
+            >
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <div class="label-row">
+
+                        <label
+                            class="label"
+                            for="email"
+                        >
+
+                            EMAIL ADDRESS
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="input-wrap">
+
+                        <i class="
+                            bi
+                            bi-envelope
+                            input-icon
+                        "></i>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="e.g. admin@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <div class="label-row">
+
+                        <label
+                            class="label"
+                            for="password"
+                        >
+
+                            PASSWORD
+
+                        </label>
+
+
+                        <a
+                            href="#"
+                            class="forgot"
+                            onclick="return false;"
+                        >
+
+                            Forgot password?
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="input-wrap">
+
+                        <i class="
+                            bi
+                            bi-lock-fill
+                            input-icon
+                        "></i>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword()"
+                            aria-label="Show password"
+                        >
+
+                            <i
+                                id="eyeIcon"
+                                class="bi bi-eye-slash"
+                            ></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REMEMBER -->
+
+                <div class="remember-row">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            name="remember"
+                        >
+
+                        Remember me
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+
+                    Login
+
+                    <i class="
+                        bi
+                        bi-arrow-right-circle
+                    "></i>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- OR -->
+
+            <div class="or-divider">
+
+                <span></span>
+
+                OR
+
+                <span></span>
+
+            </div>
+
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <a
+                href="{{ url_for('register_page') }}"
+                class="create-btn"
+            >
+
+                <i class="
+                    bi
+                    bi-person-plus
+                "></i>
+
+                Create New Account
+
+            </a>
+
+
+
+            <!-- SECURITY -->
+
+            <div class="security">
+
+                <i class="bi bi-shield-lock-fill"></i>
+
+                <span>
+                    Secure
+                </span>
+
+                •
+
+                <span>
+                    Trusted
+                </span>
+
+                •
+
+                <span>
+                    For a Better Future
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     PASSWORD TOGGLE
+========================================================== -->
+
+<script>
+
+function togglePassword() {
+
+    const password =
+        document.getElementById(
+            "password"
+        );
+
+    const icon =
+        document.getElementById(
+            "eyeIcon"
+        );
+
+
+    if (
+        password.type === "password"
+    ) {
+
+        password.type =
+            "text";
+
+        icon.className =
+            "bi bi-eye";
+
+    } else {
+
+        password.type =
+            "password";
+
+        icon.className =
+            "bi bi-eye-slash";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

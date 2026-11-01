@@ -1,0 +1,2465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Digital Twin | Smart City Digital Twin
+    </title>
+
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         BOOTSTRAP ICONS
+    ====================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         PROJECT CSS
+    ====================================================== -->
+
+    <link
+        href="{{ url_for('static', filename='css/main.css') }}"
+        rel="stylesheet"
+    >
+
+    <link
+        href="{{ url_for('static', filename='css/modules.css') }}"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         LEAFLET CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        /* =================================================
+           PAGE
+        ================================================= */
+
+        body {
+
+            margin: 0;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(0, 212, 255, 0.07),
+                    transparent 25%
+                ),
+
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(80, 70, 255, 0.08),
+                    transparent 28%
+                ),
+
+                #050914;
+
+            color: #e7edf7;
+
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+        }
+
+
+        /* =================================================
+           CONTAINER
+        ================================================= */
+
+        .digital-twin-container {
+
+            width: 100%;
+
+            max-width: 1450px;
+
+            margin: 0 auto;
+
+            padding:
+                28px;
+
+            box-sizing:
+                border-box;
+
+        }
+
+
+        /* =================================================
+           HEADER
+        ================================================= */
+
+        .digital-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .digital-eyebrow {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                7px 12px;
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(0, 212, 255, 0.08);
+
+            border:
+                1px solid
+                rgba(0, 212, 255, 0.22);
+
+            color:
+                #00d9ff;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1.2px;
+
+            margin-bottom:
+                10px;
+
+        }
+
+
+        .digital-header h1 {
+
+            margin: 0 0 7px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                32px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .digital-header h1 i {
+
+            color:
+                #00d9ff;
+
+        }
+
+
+        .digital-header p {
+
+            margin:
+                0;
+
+            color:
+                #91a2b8;
+
+            font-size:
+                13px;
+
+        }
+
+
+        /* =================================================
+           LIVE STATUS
+        ================================================= */
+
+        .live-status {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap: 8px;
+
+            padding:
+                9px 13px;
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(52, 211, 153, 0.06);
+
+            border:
+                1px solid
+                rgba(52, 211, 153, 0.18);
+
+            color:
+                #34d399;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .live-dot {
+
+            width:
+                7px;
+
+            height:
+                7px;
+
+            border-radius:
+                50%;
+
+            background:
+                #34d399;
+
+            box-shadow:
+                0 0 10px
+                rgba(52, 211, 153, 0.8);
+
+        }
+
+
+        /* =================================================
+           CARD
+        ================================================= */
+
+        .digital-card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(13, 23, 40, 0.96),
+                    rgba(7, 13, 24, 0.96)
+                );
+
+            border:
+                1px solid
+                rgba(86, 111, 153, 0.28);
+
+            border-radius:
+                16px;
+
+            box-shadow:
+                0 18px 50px
+                rgba(0, 0, 0, 0.25);
+
+            overflow:
+                hidden;
+
+        }
+
+
+        /* =================================================
+           CARD HEADER
+        ================================================= */
+
+        .digital-card-header {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            padding:
+                16px 18px;
+
+            border-bottom:
+                1px solid
+                rgba(86, 111, 153, 0.15);
+
+        }
+
+
+        .digital-card-title {
+
+            margin:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            color:
+                #f5f9ff;
+
+            font-size:
+                14px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .digital-card-title i {
+
+            color:
+                #00d9ff;
+
+        }
+
+
+        /* =================================================
+           MAP BODY
+        ================================================= */
+
+        .map-body {
+
+            padding:
+                14px;
+
+        }
+
+
+        #twinMap {
+
+            width:
+                100%;
+
+            height:
+                560px;
+
+            border-radius:
+                12px;
+
+            overflow:
+                hidden;
+
+            border:
+                1px solid
+                rgba(86, 111, 153, 0.25);
+
+        }
+
+
+        /* =================================================
+           LEGEND
+        ================================================= */
+
+        .map-legend {
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            align-items:
+                center;
+
+            gap:
+                16px;
+
+            padding:
+                13px 4px 4px;
+
+        }
+
+
+        .legend-item {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            color:
+                #91a2b8;
+
+            font-size:
+                10px;
+
+            font-weight:
+                600;
+
+        }
+
+
+        .legend-dot {
+
+            width:
+                10px;
+
+            height:
+                10px;
+
+            border-radius:
+                50%;
+
+        }
+
+
+        .legend-central {
+
+            background:
+                #22d3ee;
+
+        }
+
+
+        .legend-normal {
+
+            background:
+                #34d399;
+
+        }
+
+
+        .legend-warning {
+
+            background:
+                #f59e0b;
+
+        }
+
+
+        .legend-critical {
+
+            background:
+                #fb4b5d;
+
+        }
+
+
+        /* =================================================
+           INFO
+        ================================================= */
+
+        .map-info {
+
+            margin-top:
+                8px;
+
+            padding:
+                12px;
+
+            background:
+                rgba(7, 17, 31, 0.5);
+
+            border:
+                1px solid
+                rgba(86, 111, 153, 0.15);
+
+            border-radius:
+                10px;
+
+            color:
+                #71839a;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.7;
+
+        }
+
+
+        .map-info strong {
+
+            color:
+                #cbd8e8;
+
+        }
+
+
+        /* =================================================
+           ZONE LIST
+        ================================================= */
+
+        .zone-list {
+
+            padding:
+                15px;
+
+        }
+
+
+        .zone-item {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            padding:
+                13px;
+
+            margin-bottom:
+                10px;
+
+            background:
+                #091321;
+
+            border:
+                1px solid
+                rgba(86, 111, 153, 0.18);
+
+            border-radius:
+                12px;
+
+        }
+
+
+        .zone-item:last-child {
+
+            margin-bottom:
+                0;
+
+        }
+
+
+        .zone-name {
+
+            display:
+                block;
+
+            color:
+                #f4f8ff;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .zone-type {
+
+            display:
+                block;
+
+            margin-top:
+                4px;
+
+            color:
+                #74869d;
+
+            font-size:
+                9px;
+
+            text-transform:
+                capitalize;
+
+        }
+
+
+        .zone-status {
+
+            flex-shrink:
+                0;
+
+            padding:
+                5px 9px;
+
+            border-radius:
+                15px;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            text-transform:
+                uppercase;
+
+        }
+
+
+        .zone-status.normal {
+
+            color:
+                #34d399;
+
+            background:
+                rgba(52, 211, 153, 0.10);
+
+            border:
+                1px solid
+                rgba(52, 211, 153, 0.18);
+
+        }
+
+
+        .zone-status.warning {
+
+            color:
+                #f59e0b;
+
+            background:
+                rgba(245, 158, 11, 0.10);
+
+            border:
+                1px solid
+                rgba(245, 158, 11, 0.18);
+
+        }
+
+
+        .zone-status.critical {
+
+            color:
+                #fb7185;
+
+            background:
+                rgba(251, 75, 93, 0.11);
+
+            border:
+                1px solid
+                rgba(251, 75, 93, 0.20);
+
+        }
+
+
+        /* =================================================
+           INFRASTRUCTURE
+        ================================================= */
+
+        .infra-list {
+
+            padding:
+                15px;
+
+        }
+
+
+        .infra-item {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            padding:
+                12px 0;
+
+            border-bottom:
+                1px solid
+                rgba(86, 111, 153, 0.12);
+
+        }
+
+
+        .infra-item:last-child {
+
+            border-bottom:
+                none;
+
+        }
+
+
+        .infra-name {
+
+            color:
+                #edf4fc;
+
+            font-size:
+                11px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .infra-status {
+
+            margin-top:
+                3px;
+
+            color:
+                #74869d;
+
+            font-size:
+                8px;
+
+        }
+
+
+        .infra-type {
+
+            color:
+                #00d9ff;
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+
+            text-transform:
+                uppercase;
+
+        }
+
+
+        /* =================================================
+           ERROR
+        ================================================= */
+
+        .digital-error {
+
+            display:
+                none;
+
+            margin-top:
+                15px;
+
+            padding:
+                13px;
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(220, 53, 69, 0.12);
+
+            border:
+                1px solid
+                rgba(220, 53, 69, 0.28);
+
+            color:
+                #ff8d99;
+
+            font-size:
+                11px;
+
+        }
+
+
+        /* =================================================
+           RESPONSIVE
+        ================================================= */
+
+        @media (max-width: 900px) {
+
+            .digital-twin-container {
+
+                padding:
+                    20px;
+
+            }
+
+            .digital-header {
+
+                flex-direction:
+                    column;
+
+            }
+
+            .live-status {
+
+                align-self:
+                    flex-start;
+
+            }
+
+            #twinMap {
+
+                height:
+                    480px;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .digital-twin-container {
+
+                padding:
+                    14px;
+
+            }
+
+            .digital-header h1 {
+
+                font-size:
+                    26px;
+
+            }
+
+            #twinMap {
+
+                height:
+                    420px;
+
+            }
+
+            .map-legend {
+
+                gap:
+                    10px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<div class="digital-twin-container">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <div class="digital-header">
+
+        <div>
+
+            <div class="digital-eyebrow">
+
+                <i class="bi bi-broadcast-pin"></i>
+
+                CITY DIGITAL REPLICA
+
+            </div>
+
+
+            <h1>
+
+                <i class="bi bi-globe-americas"></i>
+
+                Digital Twin View
+
+            </h1>
+
+
+            <p>
+
+                Real-time location-aware visualization of
+                project-defined Smart City monitoring zones.
+
+            </p>
+
+        </div>
+
+
+        <div class="live-status">
+
+            <span class="live-dot"></span>
+
+            DIGITAL TWIN ONLINE
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MAP CARD
+    ====================================================== -->
+
+    <div class="digital-card mb-4">
+
+
+        <div class="digital-card-header">
+
+            <h3 class="digital-card-title">
+
+                <i class="bi bi-map-fill"></i>
+
+                City Digital Twin Map
+
+            </h3>
+
+
+            <span
+                id="mapLocationStatus"
+                style="
+                    color:#6f8299;
+                    font-size:9px;
+                "
+            >
+                Detecting location...
+            </span>
+
+        </div>
+
+
+        <div class="map-body">
+
+
+            <div
+                id="twinMap"
+            ></div>
+
+
+            <!-- =================================================
+                 LEGEND
+            ================================================== -->
+
+            <div class="map-legend">
+
+
+                <div class="legend-item">
+
+                    <span
+                        class="legend-dot legend-central"
+                    ></span>
+
+                    Central Zone
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span
+                        class="legend-dot legend-normal"
+                    ></span>
+
+                    Normal Zone
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span
+                        class="legend-dot legend-warning"
+                    ></span>
+
+                    Warning Zone
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span
+                        class="legend-dot legend-critical"
+                    ></span>
+
+                    Critical / Danger Zone
+
+                </div>
+
+
+            </div>
+
+
+            <div class="map-info">
+
+                <strong>
+                    Location-aware Digital Twin:
+                </strong>
+
+                The blue marker represents the current
+                device location when location permission
+                is granted.
+
+                The colored circles are
+                <strong>
+                    project-defined monitoring zones
+                </strong>
+                used for Digital Twin visualization.
+                They are not official administrative
+                boundaries and do not change the existing
+                ML training data.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ZONES + INFRASTRUCTURE
+    ====================================================== -->
+
+    <div class="row g-4">
+
+
+        <!-- =================================================
+             CITY ZONES
+        ================================================== -->
+
+        <div class="col-lg-6">
+
+
+            <div class="digital-card">
+
+
+                <div class="digital-card-header">
+
+                    <h3 class="digital-card-title">
+
+                        <i class="bi bi-geo-alt-fill"></i>
+
+                        City Zones
+
+                    </h3>
+
+                </div>
+
+
+                <div
+                    id="zones"
+                    class="zone-list"
+                >
+
+                    <div
+                        style="
+                            text-align:center;
+                            padding:20px;
+                            color:#71839a;
+                            font-size:11px;
+                        "
+                    >
+
+                        Loading zones...
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             INFRASTRUCTURE
+        ================================================== -->
+
+        <div class="col-lg-6">
+
+
+            <div class="digital-card">
+
+
+                <div class="digital-card-header">
+
+                    <h3 class="digital-card-title">
+
+                        <i class="bi bi-buildings-fill"></i>
+
+                        Infrastructure
+
+                    </h3>
+
+                </div>
+
+
+                <div
+                    id="infra"
+                    class="infra-list"
+                >
+
+                    <div
+                        style="
+                            text-align:center;
+                            padding:20px;
+                            color:#71839a;
+                            font-size:11px;
+                        "
+                    >
+
+                        Loading infrastructure...
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SYSTEM CONCEPT
+        ================================================== -->
+
+        <div class="col-12">
+
+
+            <div class="digital-card">
+
+
+                <div class="digital-card-header">
+
+                    <h3 class="digital-card-title">
+
+                        <i class="bi bi-diagram-3-fill"></i>
+
+                        Digital Twin System
+
+                    </h3>
+
+                </div>
+
+
+                <div class="map-info">
+
+                    <strong>
+                        Current Location
+                    </strong>
+
+                    →
+
+                    <strong>
+                        Zone Visualization
+                    </strong>
+
+                    →
+
+                    <strong>
+                        ML Prediction Context
+                    </strong>
+
+                    →
+
+                    <strong>
+                        Alerts & Reports
+                    </strong>
+
+                    <br><br>
+
+                    Traffic, Air Quality, Accident, Energy
+                    and Weather models remain independent
+                    and unchanged. The Digital Twin acts as
+                    the spatial visualization layer.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ERROR
+    ====================================================== -->
+
+    <div
+        id="digitalError"
+        class="digital-error"
+    ></div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     LEAFLET JS
+========================================================== -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadDigitalTwin();
+
+    }
+);
+
+
+/* =========================================================
+   LOAD DIGITAL TWIN
+========================================================= */
+
+async function loadDigitalTwin() {
+
+    const zonesContainer =
+        document.getElementById(
+            "zones"
+        );
+
+
+    const infraContainer =
+        document.getElementById(
+            "infra"
+        );
+
+
+    const errorContainer =
+        document.getElementById(
+            "digitalError"
+        );
+
+
+    const locationStatus =
+        document.getElementById(
+            "mapLocationStatus"
+        );
+
+
+    try {
+
+
+        /* =================================================
+           CALL BACKEND
+        ================================================== */
+
+        const response =
+            await fetch(
+                "/api/digital-twin/"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Digital Twin API request failed."
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message ||
+                "Digital Twin data unavailable."
+            );
+
+        }
+
+
+        const data =
+            result.data || {};
+
+
+        const zones =
+            Array.isArray(
+                data.zones
+            )
+                ? data.zones
+                : [];
+
+
+        const infrastructure =
+            Array.isArray(
+                data.infrastructure
+            )
+                ? data.infrastructure
+                : [];
+
+
+        /* =================================================
+           RENDER DATABASE DATA
+        ================================================== */
+
+        renderZones(
+            zones,
+            zonesContainer
+        );
+
+
+        renderInfrastructure(
+            infrastructure,
+            infraContainer
+        );
+
+
+        /* =================================================
+           CURRENT LOCATION
+        ================================================== */
+
+        initializeMap(
+            zones,
+            infrastructure,
+            locationStatus
+        );
+
+
+    } catch (error) {
+
+
+        console.error(
+            "Digital Twin error:",
+            error
+        );
+
+
+        zonesContainer.innerHTML =
+            "<div class='digital-loading'>Unable to load zones.</div>";
+
+
+        infraContainer.innerHTML =
+            "<div class='digital-loading'>Unable to load infrastructure.</div>";
+
+
+        errorContainer.textContent =
+            error.message ||
+            "Unable to load Digital Twin.";
+
+
+        errorContainer.style.display =
+            "block";
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER ZONES
+========================================================= */
+
+function renderZones(
+    zones,
+    container
+) {
+
+
+    if (
+        !zones ||
+        zones.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div style="
+                text-align:center;
+                padding:20px;
+                color:#71839a;
+                font-size:11px;
+            ">
+
+                No city zones available.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+        zones.map(
+            function (zone) {
+
+
+                const status =
+                    String(
+                        zone.status ||
+                        "normal"
+                    ).toLowerCase();
+
+
+                let statusClass =
+                    "normal";
+
+
+                if (
+                    status === "warning"
+                ) {
+
+                    statusClass =
+                        "warning";
+
+                } else if (
+                    status === "critical"
+                ) {
+
+                    statusClass =
+                        "critical";
+
+                }
+
+
+                return `
+
+                    <div class="zone-item">
+
+                        <div>
+
+                            <span class="zone-name">
+
+                                ${escapeHtml(
+                                    zone.zone_name ||
+                                    "Unnamed Zone"
+                                )}
+
+                            </span>
+
+
+                            <span class="zone-type">
+
+                                ${escapeHtml(
+                                    zone.zone_type ||
+                                    "Monitoring Zone"
+                                )}
+
+                            </span>
+
+                        </div>
+
+
+                        <span
+                            class="
+                                zone-status
+                                ${statusClass}
+                            "
+                        >
+
+                            ${status.toUpperCase()}
+
+                        </span>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================================================
+   RENDER INFRASTRUCTURE
+========================================================= */
+
+function renderInfrastructure(
+    infrastructure,
+    container
+) {
+
+
+    if (
+        !infrastructure ||
+        infrastructure.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div style="
+                text-align:center;
+                padding:20px;
+                color:#71839a;
+                font-size:11px;
+            ">
+
+                No infrastructure available.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+        infrastructure.map(
+            function (item) {
+
+                return `
+
+                    <div class="infra-item">
+
+                        <div>
+
+                            <div class="infra-name">
+
+                                ${escapeHtml(
+                                    item.name ||
+                                    "Infrastructure"
+                                )}
+
+                            </div>
+
+
+                            <div class="infra-status">
+
+                                Status:
+                                ${escapeHtml(
+                                    item.status ||
+                                    "Unknown"
+                                )}
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="infra-type">
+
+                            ${escapeHtml(
+                                item.type ||
+                                "Facility"
+                            )}
+
+                        </span>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================================================
+   INITIALIZE MAP
+========================================================= */
+
+function initializeMap(
+    zones,
+    infrastructure,
+    locationStatus
+) {
+
+
+    const fallbackLocation = {
+
+        lat: 16.5449,
+
+        lng: 81.5212
+
+    };
+
+
+    const map =
+        L.map(
+            "twinMap"
+        );
+
+
+    /* =====================================================
+       OPEN STREET MAP
+    ====================================================== */
+
+    L.tileLayer(
+
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+        {
+
+            maxZoom:
+                19,
+
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+
+        }
+
+    ).addTo(map);
+
+
+    /* =====================================================
+       COLORS
+    ====================================================== */
+
+    const colors = {
+
+        central:
+            "#22d3ee",
+
+        normal:
+            "#34d399",
+
+        warning:
+            "#f59e0b",
+
+        critical:
+            "#fb4b5d"
+
+    };
+
+
+    /* =====================================================
+       DRAW MAP
+    ====================================================== */
+
+    function drawMap(
+        latitude,
+        longitude,
+        usingCurrentLocation
+    ) {
+
+
+        map.setView(
+            [
+                latitude,
+                longitude
+            ],
+            14
+        );
+
+
+        /* =================================================
+           CURRENT LOCATION MARKER
+        ================================================== */
+
+        const currentMarker =
+            L.circleMarker(
+
+                [
+                    latitude,
+                    longitude
+                ],
+
+                {
+
+                    radius:
+                        10,
+
+                    color:
+                        "#ffffff",
+
+                    weight:
+                        3,
+
+                    fillColor:
+                        "#2563eb",
+
+                    fillOpacity:
+                        1
+
+                }
+
+            ).addTo(map);
+
+
+        currentMarker.bindPopup(`
+
+            <div style="
+                font-family:Arial;
+                min-width:160px;
+            ">
+
+                <strong style="
+                    color:#111827;
+                    font-size:13px;
+                ">
+
+                    📍 You Are Here
+
+                </strong>
+
+                <br><br>
+
+                <span style="
+                    color:#6b7280;
+                ">
+
+                    ${usingCurrentLocation
+                        ? "Current device location"
+                        : "Fallback project location"}
+
+                </span>
+
+            </div>
+
+        `);
+
+
+        /* =================================================
+           LOCATION CIRCLE
+        ================================================== */
+
+        L.circle(
+
+            [
+                latitude,
+                longitude
+            ],
+
+            {
+
+                radius:
+                    100,
+
+                color:
+                    "#2563eb",
+
+                fillColor:
+                    "#2563eb",
+
+                fillOpacity:
+                    0.06,
+
+                weight:
+                    1
+
+            }
+
+        ).addTo(map);
+
+
+        /* =================================================
+           CREATE PROJECT ZONES
+           
+           Database zone names/status are preserved.
+           Their displayed map coordinates are arranged
+           around the current location so the Digital Twin
+           follows the user.
+        ================================================== */
+
+        const zonePositions = [
+
+            {
+                lat:
+                    latitude,
+
+                lng:
+                    longitude
+            },
+
+            {
+                lat:
+                    latitude + 0.006,
+
+                lng:
+                    longitude + 0.004
+            },
+
+            {
+                lat:
+                    latitude - 0.005,
+
+                lng:
+                    longitude + 0.0055
+            },
+
+            {
+                lat:
+                    latitude + 0.0025,
+
+                lng:
+                    longitude - 0.007
+            }
+
+        ];
+
+
+        const zoneLayers = [];
+
+
+        zones.forEach(
+            function (zone, index) {
+
+
+                const position =
+                    zonePositions[
+                        index %
+                        zonePositions.length
+                    ];
+
+
+                const status =
+                    String(
+                        zone.status ||
+                        "normal"
+                    ).toLowerCase();
+
+
+                const isCentral =
+                    index === 0 ||
+                    String(
+                        zone.zone_name ||
+                        ""
+                    ).toLowerCase()
+                        .includes(
+                            "central"
+                        );
+
+
+                const color =
+                    isCentral
+                        ? colors.central
+                        : (
+                            colors[status] ||
+                            colors.normal
+                        );
+
+
+                /* =========================================
+                   ZONE CIRCLE
+                ========================================== */
+
+                const area =
+                    L.circle(
+
+                        [
+                            position.lat,
+                            position.lng
+                        ],
+
+                        {
+
+                            radius:
+                                isCentral
+                                    ? 800
+                                    : 650,
+
+                            color:
+                                color,
+
+                            fillColor:
+                                color,
+
+                            fillOpacity:
+                                status ===
+                                "critical"
+                                    ? 0.25
+                                    : 0.13,
+
+                            weight:
+                                3
+
+                        }
+
+                    ).addTo(map);
+
+
+                zoneLayers.push(
+                    area
+                );
+
+
+                /* =========================================
+                   ZONE MARKER
+                ========================================== */
+
+                const marker =
+                    L.circleMarker(
+
+                        [
+                            position.lat,
+                            position.lng
+                        ],
+
+                        {
+
+                            radius:
+                                isCentral
+                                    ? 12
+                                    : 10,
+
+                            color:
+                                "#ffffff",
+
+                            weight:
+                                2,
+
+                            fillColor:
+                                color,
+
+                            fillOpacity:
+                                0.95
+
+                        }
+
+                    ).addTo(map);
+
+
+                zoneLayers.push(
+                    marker
+                );
+
+
+                /* =========================================
+                   POPUP
+                ========================================== */
+
+                marker.bindPopup(`
+
+                    <div style="
+                        font-family:Arial;
+                        min-width:170px;
+                    ">
+
+                        <strong style="
+                            font-size:14px;
+                            color:#111827;
+                        ">
+
+                            ${escapeHtml(
+                                zone.zone_name ||
+                                "Monitoring Zone"
+                            )}
+
+                        </strong>
+
+                        <br><br>
+
+                        <span style="
+                            color:#6b7280;
+                        ">
+
+                            Type:
+
+                        </span>
+
+                        ${escapeHtml(
+                            zone.zone_type ||
+                            "Monitoring"
+                        )}
+
+                        <br>
+
+                        <span style="
+                            color:#6b7280;
+                        ">
+
+                            Status:
+
+                        </span>
+
+                        <strong>
+
+                            ${status.toUpperCase()}
+
+                        </strong>
+
+                        <br>
+
+                        <span style="
+                            color:#6b7280;
+                        ">
+
+                            Zone Code:
+
+                        </span>
+
+                        ${escapeHtml(
+                            zone.zone_code ||
+                            "-"
+                        )}
+
+                    </div>
+
+                `);
+
+
+                /* =========================================
+                   ZONE LABEL
+                ========================================== */
+
+                L.marker(
+
+                    [
+                        position.lat,
+                        position.lng
+                    ],
+
+                    {
+
+                        icon:
+                            L.divIcon({
+
+                                className:
+                                    "zone-label-icon",
+
+                                html: `
+
+                                    <div style="
+                                        background:
+                                            rgba(5,9,20,.88);
+
+                                        border:
+                                            1px solid
+                                            ${color};
+
+                                        color:
+                                            #ffffff;
+
+                                        padding:
+                                            5px 8px;
+
+                                        border-radius:
+                                            7px;
+
+                                        font-size:
+                                            9px;
+
+                                        font-weight:
+                                            800;
+
+                                        white-space:
+                                            nowrap;
+
+                                        box-shadow:
+                                            0 4px 16px
+                                            rgba(0,0,0,.30);
+                                    ">
+
+                                        ${escapeHtml(
+                                            zone.zone_name ||
+                                            "Zone"
+                                        )}
+
+                                    </div>
+
+                                `,
+
+                                iconSize:
+                                    null,
+
+                                iconAnchor:
+                                    [-10, 33]
+
+                            }),
+
+                        interactive:
+                            false
+
+                    }
+
+                ).addTo(map);
+
+            }
+        );
+
+
+        /* =================================================
+           INFRASTRUCTURE
+        ================================================== */
+
+        infrastructure.forEach(
+            function (item, index) {
+
+
+                const position =
+                    zonePositions[
+                        index %
+                        zonePositions.length
+                    ];
+
+
+                const infraLat =
+                    position.lat +
+                    0.0015;
+
+
+                const infraLng =
+                    position.lng +
+                    0.0015;
+
+
+                const icon =
+                    L.divIcon({
+
+                        className:
+                            "infra-marker",
+
+                        html: `
+
+                            <div style="
+                                width:24px;
+                                height:24px;
+
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+
+                                border-radius:50%;
+
+                                background:#111c30;
+
+                                border:
+                                    2px solid
+                                    #8b5cf6;
+
+                                color:#ffffff;
+
+                                font-size:10px;
+
+                                box-shadow:
+                                    0 0 12px
+                                    rgba(139,92,246,.35);
+                            ">
+
+                                <i class="
+                                    bi
+                                    bi-building
+                                "></i>
+
+                            </div>
+
+                        `,
+
+                        iconSize:
+                            [24, 24],
+
+                        iconAnchor:
+                            [12, 12]
+
+                    });
+
+
+                L.marker(
+
+                    [
+                        infraLat,
+                        infraLng
+                    ],
+
+                    {
+                        icon:
+                            icon
+                    }
+
+                )
+                .addTo(map)
+
+                .bindPopup(`
+
+                    <div style="
+                        font-family:Arial;
+                        min-width:160px;
+                    ">
+
+                        <strong style="
+                            color:#111827;
+                            font-size:13px;
+                        ">
+
+                            ${escapeHtml(
+                                item.name ||
+                                "Infrastructure"
+                            )}
+
+                        </strong>
+
+                        <br><br>
+
+                        <span style="
+                            color:#6b7280;
+                        ">
+
+                            Type:
+
+                        </span>
+
+                        ${escapeHtml(
+                            item.type ||
+                            "Facility"
+                        )}
+
+                        <br>
+
+                        <span style="
+                            color:#6b7280;
+                        ">
+
+                            Status:
+
+                        </span>
+
+                        ${escapeHtml(
+                            item.status ||
+                            "Unknown"
+                        )}
+
+                    </div>
+
+                `);
+
+            }
+        );
+
+
+        /* =================================================
+           FIT ALL ZONES
+        ================================================== */
+
+        const bounds =
+            L.latLngBounds([]);
+
+
+        zones.forEach(
+            function (zone, index) {
+
+                const position =
+                    zonePositions[
+                        index %
+                        zonePositions.length
+                    ];
+
+
+                bounds.extend(
+                    [
+                        position.lat,
+                        position.lng
+                    ]
+                );
+
+            }
+        );
+
+
+        bounds.extend(
+            [
+                latitude,
+                longitude
+            ]
+        );
+
+
+        if (
+            bounds.isValid()
+        ) {
+
+            map.fitBounds(
+                bounds,
+                {
+                    padding:
+                        [35, 35]
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           STATUS TEXT
+        ================================================== */
+
+        locationStatus.textContent =
+            usingCurrentLocation
+                ? "Current location detected"
+                : "Using fallback location";
+
+    }
+
+
+    /* =====================================================
+       BROWSER GEOLOCATION
+    ====================================================== */
+
+    if (
+        navigator.geolocation
+    ) {
+
+        navigator.geolocation.getCurrentPosition(
+
+            function (position) {
+
+                drawMap(
+
+                    position.coords.latitude,
+
+                    position.coords.longitude,
+
+                    true
+
+                );
+
+            },
+
+
+            function (error) {
+
+                console.warn(
+                    "Location permission/error:",
+                    error.message
+                );
+
+
+                drawMap(
+
+                    fallbackLocation.lat,
+
+                    fallbackLocation.lng,
+
+                    false
+
+                );
+
+            },
+
+
+            {
+
+                enableHighAccuracy:
+                    true,
+
+                timeout:
+                    15000,
+
+                maximumAge:
+                    30000
+
+            }
+
+        );
+
+    } else {
+
+        drawMap(
+
+            fallbackLocation.lat,
+
+            fallbackLocation.lng,
+
+            false
+
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+) {
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
