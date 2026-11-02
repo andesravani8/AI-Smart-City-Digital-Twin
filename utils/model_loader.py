@@ -68,7 +68,12 @@ class ModelLoader:
         self.models.clear()
         self.preprocessors.clear()
         self.errors.clear()
+        print("DEBUG BASE_DIR:", BASE_DIR)
+        print("DEBUG MODEL_DIR:", MODEL_DIR)
+        print("DEBUG MODEL_DIR EXISTS:", os.path.exists(MODEL_DIR))
 
+        if os.path.exists(MODEL_DIR):
+            print("DEBUG FILES:", os.listdir(MODEL_DIR))
         modules = [
             "traffic",
             "air_quality",
